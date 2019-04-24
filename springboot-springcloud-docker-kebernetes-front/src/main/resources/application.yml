@@ -1,0 +1,33 @@
+#server
+server:
+  port: 1669
+  servlet:
+    context-path: "/"
+
+#spring配置
+spring:
+  aop:
+    auto: true
+  application:
+    name: "springboot-springcloud-docker-front"
+  main:
+    banner-mode: log
+    web-application-type: servlet
+  jackson:
+    locale: "zh_CN"
+    time-zone: "GMT+8"
+    date-format: "yyyy-MM-dd HH:mm:ss"
+    joda-date-time-format: ${spring.jackson.date-format}
+    default-property-inclusion: always
+  profiles:
+    active: default
+
+#eureka
+eureka:
+  client:
+    register-with-eureka: true
+    service-url:
+      defaultZone: "http://localhost:1668/eureka/"
+    instance:
+      instance-id: "${spring.application.name}:${random.value}"
+      hostname: "127.0.0.1"

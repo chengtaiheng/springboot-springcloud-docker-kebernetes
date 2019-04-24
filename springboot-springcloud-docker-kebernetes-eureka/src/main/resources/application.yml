@@ -1,0 +1,46 @@
+#spring配置
+spring:
+  profiles:
+    active: default
+  aop:
+    auto: true
+  main:
+    banner-mode: log
+    web-application-type: servlet
+  banner:
+    location: banner.txt
+  application:
+    name: "springboot-springcloud-docker-eurake"
+#  jackson:
+#    locale: "zh_CN"
+#    time-zone: "GMT+8"
+#    date-format: "yyyy-MM-dd HH:mm;ss"
+#    joda-date-time-format: ${spring.jackson.date-format}
+#    default-property-inclusion: always
+#  jmx:
+#    enabled: false
+
+#servlet
+server:
+  port: 1668
+  servlet:
+    context-path: "/"
+eureka:
+  instance:
+    prefer-ip-address: true
+    lease-renewal-interval-in-seconds: 30
+    lease-expiration-duration-in-seconds: 90
+    hostname: 127.0.0.1
+  dashboard:
+    path: "/dashboard"
+  server:
+    enable-self-preservation: false
+  client:
+    register-with-eureka: false
+    fetch-registry: false
+    service-url:
+      defaultZone: "http://${eureka.instance.hostname}:${server.port}/eureka"
+
+
+
+

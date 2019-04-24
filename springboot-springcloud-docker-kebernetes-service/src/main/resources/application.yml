@@ -1,0 +1,40 @@
+#服务端口
+server:
+  port: 1667
+
+#spring
+spring:
+  profiles:
+    active: default
+  aop:
+    auto: true
+  application:
+    banner-mode: log
+    web-application-type: servlet
+    name: "springboot-springcloud-docker-kebernetes-service"
+  banner:
+    location: banner.txt
+  jackson:
+    locale: "zh_CN"
+    time-zone: "GMT+8"
+    date-format: "yyyy-MM-dd HH;mm;ss"
+    joda-date-time-format: ${spring.jackson.date-format}
+    default-property-inclusion: always
+
+#endpoints
+management:
+  endpoints:
+    web:
+      base-path: "/actuator"
+      exposure:
+        include: "*"
+
+#eureka
+eureka:
+  client:
+    register-with-eureka: true
+    service-url:
+      defaultZone: "http://localhost:1668/eureka/"
+    instance:
+      instance-id: "${spring.application.name}:${random.value}"
+      hostname: "127.0.0.1"
