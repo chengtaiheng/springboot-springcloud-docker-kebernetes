@@ -28,6 +28,7 @@ public class FrontApplication implements ApplicationRunner {
         SpringApplication.run(FrontApplication.class, args);
     }
 
+    @Override
     public void run(ApplicationArguments args) throws Exception {
         System.out.println("url-service"+env.getProperty("url.service"));
     }
