@@ -12,6 +12,7 @@ import java.util.Map;
 
 @FeignClient(
         name = "springboot-springcloud-docker-kebernetes-service",
+        url = "${url.service}",
         path = "/service"
 )
 public interface SpringbootCloudFeignClient {

@@ -1,0 +1,53 @@
+# ----------------------------------------------------------------------------------------------------------------------
+# Eureka
+# ----------------------------------------------------------------------------------------------------------------------
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: eureka
+  namespace: chth-kenbernetes
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: chth-kenbernetes
+      node: eureka
+  template:
+    metadata:
+      name: eureka
+      namespace: chth-kenbernetes
+      labels:
+        app: chth-kenbernetes
+        node: eureka
+    spec:
+      volumes:
+      - name: log
+        hostPath:
+          path: /docker_project/springboot-springcloud-docker-kebernetes/eureka
+      containers:
+      - name: eureka
+        image: 192.168.99.115/chth/springboot-springcloud-docker-kebernetes-eureka:latest
+        imagePullPolicy: Always
+        volumeMounts:
+        - name: log
+          mountPath: /chth
+        ports:
+        - containerPort: 1668
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: eureka
+  namespace: chth-kenbernetes
+spec:
+  selector:
+    app: chth-kenbernetes
+    node: eureka
+  type: LoadBalancer
+  ports:
+  - name: main
+    port: 1668
+    targetPort: 1668
+    nodePort: 1668

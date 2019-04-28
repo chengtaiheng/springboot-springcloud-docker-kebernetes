@@ -1,0 +1,53 @@
+# ----------------------------------------------------------------------------------------------------------------------
+# Service - Account
+# ----------------------------------------------------------------------------------------------------------------------
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: service
+  namespace: chth-kenbernetes
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: chth-kenbernetes
+      node: service
+  template:
+    metadata:
+      name: service
+      namespace: chth-kenbernetes
+      labels:
+        app: chth-kenbernetes
+        node: service
+    spec:
+      volumes:
+      - name: log
+        hostPath:
+          path: /docker_project/springboot-springcloud-docker-kebernetes/service
+      containers:
+      - name: service
+        image: 192.168.99.115/chth/springboot-springcloud-docker-kebernetes-service:latest
+        imagePullPolicy: Always
+        volumeMounts:
+        - name: log
+          mountPath: /chth
+        ports:
+        - containerPort: 1667
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: service
+  namespace: chth-kenbernetes
+spec:
+  selector:
+    app: chth-kenbernetes
+    node: service
+  type: LoadBalancer
+  ports:
+  - name: main
+    port: 1667
+    targetPort: 1667
+    nodePort: 1667
