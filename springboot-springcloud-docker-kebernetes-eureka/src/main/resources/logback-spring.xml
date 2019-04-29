@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration debug="false">
+
+    <!--追加到控制台-->
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>[%d{yyyy-MM-dd HH:mm:ss.SSS,GMT+8}]%-5level %logger{72}[%L] - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!--追加到文件-->
+    <appender name="FILE" class="ch.qos.logback.core.FileAppender">
+        <file>/chth/eureka.log</file>
+        <append>true</append>
+        <encoder>
+            <pattern>[%d{yyyy-MM-dd HH:mm:ss.SSS,GMT+8}]%-5level %logger{72}[%L] - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!--DEBUG以及DEBUG以上级别的输出-->
+    <logger name="springboot.springcloud.docker.front.application" level="DEBUG"/>
+    <root level="INFO">
+        <appender-ref ref="STDOUT"/>
+        <appender-ref ref="FILE"/>
+    </root>
+
+</configuration>
