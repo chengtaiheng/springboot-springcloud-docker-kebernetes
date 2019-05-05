@@ -16,4 +16,12 @@ latest ：镜像的tag
 ### 第二步，将kebernetes的配置文件上传到服务器上，即本项目的.k8s文件
 ### 第三步，运行kenbernetes命令，启动docker容器，
 >ku apply -f **.yaml>
+**注意：其中  	00-init.yaml 为必须要运行的yaml文件（为项目的命名空间），再依次运行其它yaml文件**
+### 第三步 停止运行的容器
+
+
+
+
+
+
 
