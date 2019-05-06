@@ -9,10 +9,15 @@
 ### 第一步，运行refactor.sh,构建镜像，并将镜像上传到harbor镜像仓库：要推送的镜像格式如下：
 
 **192.168.99.115/chth/springboot-springcloud-docker-kebernetes-eureka:latest**
+
 192.168.99.115 ：远程镜像仓库的ip地址
+
 chth ：镜像所属的项目名称
+
 springboot-springcloud-docker-kebernetes-eureka ：镜像的名称
+
 latest ：镜像的tag
+
 ### 第二步，将kebernetes的配置文件上传到服务器上，即本项目的.k8s文件
 ### 第三步，运行kenbernetes命令，启动docker容器，
 > ku（**这里是别名，我装了zsh**） apply -f **.yaml 
