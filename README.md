@@ -15,10 +15,12 @@ springboot-springcloud-docker-kebernetes-eureka ：镜像的名称
 latest ：镜像的tag
 ### 第二步，将kebernetes的配置文件上传到服务器上，即本项目的.k8s文件
 ### 第三步，运行kenbernetes命令，启动docker容器，
->ku（**这里是别名，我装了zsh**） apply -f **.yaml br
-** 注意：其中  	00-init.yaml 为必须要运行的yaml文件（为项目的命名空间），再依次运行其它yaml文件**
+> ku（**这里是别名，我装了zsh**） apply -f **.yaml 
+
+**注意：其中  	00-init.yaml 为必须要运行的yaml文件（为项目的命名空间），再依次运行其它yaml文件**
 ### 第三步， 停止并删除运行的节点
->ku delete -f **.yaml
+> ku delete -f **.yaml
+
 **注意不能直接停止00-init.yaml,一旦直接停止命名空间，则它下面的节点都会停止，但是可能导致docker容器没有正常停止**
 ### 第四步 用命令查看映射的日志
 >ku logs -f -n 命名空间 p0004-workhourse-deployment-6b98ffbb54-rht85
