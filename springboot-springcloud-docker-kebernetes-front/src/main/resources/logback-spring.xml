@@ -17,11 +17,24 @@
         </encoder>
     </appender>
 
+    <!--追加json文件-->
+    <appender name="STASH" class="ch.qos.logback.core.rolling.RollingFileAppender">
+            <file>/chth/front.json</file>
+        <append>true</append>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>/chth/front.%d{yyyy-MM-dd}.json</fileNamePattern>
+            <maxHistory>7</maxHistory>
+        </rollingPolicy>
+        <encoder class="net.logstash.logback.encoder.LogstashEncoder"/>
+    </appender>
+
+
     <!--DEBUG以及DEBUG以上级别的输出-->
     <logger name="springboot.springcloud.docker.front.application" level="DEBUG"/>
     <root level="INFO">
         <appender-ref ref="STDOUT"/>
         <appender-ref ref="FILE"/>
+        <appender-ref ref="STASH"/>
     </root>
 
 </configuration>

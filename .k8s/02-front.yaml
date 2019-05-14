@@ -25,6 +25,12 @@ spec:
       - name: log
         hostPath:
           path: /var/log/chth-front/
+      - name: logstash
+        configMap:
+          name: chth
+          items:
+          - key: logstash-front
+            path: front.conf
       containers:
       - name: service
         image: 192.168.99.115/chth/springboot-springcloud-docker-kebernetes-front:latest
@@ -34,6 +40,18 @@ spec:
           mountPath: /chth
         ports:
         - containerPort: 1669
+      - name: consumer-logstash
+          image: 192.168.99.115/docker-hub/logstash:5.6.14
+          imagePullPolicy: IfNotPresent
+          volumeMounts:
+          - name: log
+            mountPath: /var/log/chth-front/
+          - name: logstash
+            mountPath: /config
+          command:
+          - "logstash"
+          - "-f"
+          - "/config/front.conf"
 ---
 
 apiVersion: v1

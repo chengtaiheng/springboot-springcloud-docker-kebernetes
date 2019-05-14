@@ -9,3 +9,57 @@ metadata:
 
 ---
 
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: chth
+  namespace: chth-kebernetes
+data:
+  logstash-eureka: |
+    input {
+      file {
+        path => "/chth/eureka.json"
+        codec => "json"
+        type => "eureka"
+      }
+    }
+    output {
+      if [type]=="eureka" {
+        elasticsearch {
+          hosts => [ "192.168.99.114:9200" ]
+          index => "chth-kebernetes-eureka-%{+YYYY.MM.dd}"
+        }
+      }
+    }
+  logstash-front: |
+    input {
+      file {
+        path => "/chth/front.json"
+        codec => "json"
+        type => "configserver"
+      }
+    }
+    output {
+      if [type]=="front" {
+        elasticsearch {
+          hosts => [ "192.168.99.114:9200" ]
+          index => "chth-kebernetes-front-%{+YYYY.MM.dd}"
+        }
+      }
+    }
+  logstash-service: |
+    input {
+      file {
+        path => "/chth/service.log"
+        codec => "json"
+        type => "producer"
+      }
+    }
+    output {
+      if [type]=="service" {
+        elasticsearch {
+          hosts => [ "192.168.99.114:9200" ]
+          index => "chth-kebernetes-service-%{+YYYY.MM.dd}"
+        }
+      }
+    }
