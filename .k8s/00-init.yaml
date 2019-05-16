@@ -36,7 +36,7 @@ data:
       file {
         path => "/chth/front.json"
         codec => "json"
-        type => "configserver"
+        type => "front"
       }
     }
     output {
@@ -52,7 +52,7 @@ data:
       file {
         path => "/chth/service.json"
         codec => "json"
-        type => "producer"
+        type => "service"
       }
     }
     output {
