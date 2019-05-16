@@ -50,7 +50,7 @@ data:
   logstash-service: |
     input {
       file {
-        path => "/chth/service.log"
+        path => "/chth/service.json"
         codec => "json"
         type => "producer"
       }

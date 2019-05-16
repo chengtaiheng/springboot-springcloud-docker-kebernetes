@@ -26,11 +26,11 @@ spec:
         hostPath:
           path: /var/log/chth-eureka/
       - name: logstash
-          configMap:
-            name: chth
-            items:
-            - key: logstash-eureka
-              path: eureka.conf
+        configMap:
+          name: chth
+          items:
+          - key: logstash-eureka
+            path: eureka.conf
       containers:
       - name: eureka
         image: 192.168.99.115/chth/springboot-springcloud-docker-kebernetes-eureka:latest
@@ -43,17 +43,17 @@ spec:
         ports:
         - containerPort: 1668
       - name: consumer-logstash
-          image: 192.168.99.115/docker-hub/logstash:5.6.14
-          imagePullPolicy: IfNotPresent
-          volumeMounts:
-          - name: log
-            mountPath: /var/log/chth-eureka/
-          - name: logstash
-            mountPath: /config
-          command:
-          - "logstash"
-          - "-f"
-          - "/config/eureka.conf"
+        image: 192.168.99.115/docker-hub/logstash:5.6.14
+        imagePullPolicy: IfNotPresent
+        volumeMounts:
+        - name: log
+          mountPath: /var/log/chth-eureka/
+        - name: logstash
+          mountPath: /config
+        command:
+        - "logstash"
+        - "-f"
+        - "/config/eureka.conf"
 
 ---
 

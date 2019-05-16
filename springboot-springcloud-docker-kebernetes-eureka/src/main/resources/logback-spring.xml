@@ -30,6 +30,7 @@
 
     <!--DEBUG以及DEBUG以上级别的输出-->
     <logger name="springboot.springcloud.docker.front.application" level="DEBUG"/>
+
     <root level="INFO">
         <appender-ref ref="STDOUT"/>
         <appender-ref ref="FILE"/>
